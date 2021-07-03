@@ -5,6 +5,14 @@ class Game {
         this.ready = false;
     }
 
+    /**
+     * Returns active player
+     * @return  {Object}    player - The active player
+     */
+     get activePlayer() {
+        return this.players.find(player => player.active);
+    }
+
     /** 
      * Creates two player objects
      * @return  {Array}    An array of two Player objects.
@@ -13,14 +21,6 @@ class Game {
         const players = [new Player('Player 1', 1, '#e15258', true),
                          new Player('Player 2', 2, '#e15258')];
         return players;
-    }
-
-    /**
-     * Returns active player
-     * @return  {Object}    player - The active player
-     */
-     get activePlayer() {
-        return this.players.find(player => player.active);
     }
 
     /**
@@ -39,9 +39,9 @@ class Game {
     handleKeydown(e) {
         if (this.ready) {
             if (e.key === 'ArrowLeft') {
-                //move left
+                this.activePlayer.activeToken.moveLeft();
             } else if (e.key === 'ArrowRight') {
-                //move right
+                this.activePlayer.activeToken.moveRight(this.board.columns);
             } else if (e.key === 'ArrowDown') {
                 //play token
             }
