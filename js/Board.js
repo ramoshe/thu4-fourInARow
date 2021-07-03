@@ -21,4 +21,11 @@ class Board {
         }
         return spaces;
     }
+
+    /**
+     * Draws associated SVG spaces for all game spaces
+     */
+    drawHTMLBoard() {
+        this.spaces.forEach(column => column.forEach(space => space.drawSVGSpace()));
+    }
 }
