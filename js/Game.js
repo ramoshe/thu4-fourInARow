@@ -14,4 +14,11 @@ class Game {
                          new Player('Player 2', 2, '#e15258')];
         return players;
     }
+
+    /**
+     * Gets game ready for play
+     */
+    startGame() {
+        //code
+    }
 }
