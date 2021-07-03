@@ -19,7 +19,7 @@ class Game {
      */
     createPlayers() {
         const players = [new Player('Player 1', 1, '#e15258', true),
-                         new Player('Player 2', 2, '#e15258')];
+                         new Player('Player 2', 2, '#e59a13')];
         return players;
     }
 
@@ -67,6 +67,27 @@ class Game {
             activeToken.drop(targetSpace, () => {
                 game.updateGameState(activeToken, targetSpace)
             });
+        }
+    }
+
+    /** 
+     * Updates game state after token is dropped. 
+     * @param   {Object}  token  -  The token that's being dropped.
+     * @param   {Object}  target -  Targeted space for dropped token.
+     */
+    updateGameState(token, target) {
+        target.mark(token);
+        if (!this.checkForWin(target)) {
+            this.switchPlayers();
+            console.log(this.activePlayer.color);
+            if (this.activePlayer.checkTokens()) {
+                this.activePlayer.activeToken.drawHTMLToken();
+                this.ready = true;
+            } else {
+                this.gameOver(`No more tokens`);
+            }
+        } else {
+            this.gameOver(`${target.owner.name} wins!`)
         }
     }
 
@@ -144,28 +165,7 @@ class Game {
      * @param {string} message - Game over message.      
      */
     gameOver(message) {
-        const gameOver = document.querySelector('#game-over');
-        gameOver.style.display = 'block';
-        gameOver.textContent = message;
-    }
-
-    /** 
-     * Updates game state after token is dropped. 
-     * @param   {Object}  token  -  The token that's being dropped.
-     * @param   {Object}  target -  Targeted space for dropped token.
-     */
-    updateGameState(token, target) {
-        target.mark(token);
-        if (!this.checkForWin(target)) {
-            this.switchPlayers();
-            if (this.activePlayer.checkTokens()) {
-                this.activePlayer.activeToken.drawHTMLToken();
-                this.ready = true;
-            } else {
-                this.gameOver(`No more tokens`);
-            }
-        } else {
-            this.gameOver(`${target.owner.name} wins!`)
-        }
+	    document.getElementById('game-over').style.display = 'block';
+        document.getElementById('game-over').textContent = message;
     }
 }
