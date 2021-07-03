@@ -43,8 +43,27 @@ class Game {
             } else if (e.key === 'ArrowRight') {
                 this.activePlayer.activeToken.moveRight(this.board.columns);
             } else if (e.key === 'ArrowDown') {
-                //play token
+                this.playToken();
             }
+        }
+    }
+
+    /**
+     * Finds Space object to drop the Token into, drops Token
+     */
+    playToken() {
+        let spaces = this.board.spaces;
+        let activeToken = this.activePlayer.activeToken;
+        let targetColumn = spaces[activeToken.columnLocation];
+        let targetSpace = null;
+        targetColumn.forEach(space => {
+            if (space.token === null) {
+                targetSpace = space;
+            }
+        });
+        if (targetSpace !== null) {
+            game.ready = false;
+            activeToken.drop(targetSpace);
         }
     }
 }
