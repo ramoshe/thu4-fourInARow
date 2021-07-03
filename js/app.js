@@ -3,9 +3,9 @@ const game = new Game();
 /** 
  * Listens for click on `#begin-game` and calls startGame() on game object
  */
-const startButton = document.getElementById('begin-game');
+const startButton = document.querySelector('#begin-game');
 startButton.addEventListener('click', () => {
     game.startGame();
-    this.style.display = 'none';
-    document.getElementById('play-area').style.opacity = '1';
+    startButton.style.display = 'none';
+    document.querySelector('#play-area').style.opacity = '1';
 });
