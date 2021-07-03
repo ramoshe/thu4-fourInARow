@@ -155,9 +155,9 @@ class Game {
      * Switches active player
      */
     switchPlayers() {
-        for (let player of this.players) {
+        this.players.forEach(player => {
             player.active = player.active === true ? false : true;
-        }
+        });
     }
 
     /** 
